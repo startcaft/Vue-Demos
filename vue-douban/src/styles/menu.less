@@ -1,0 +1,44 @@
+//菜单区域，距离顶端40px，距离左边-180px
+.menu_bar {
+    position: fixed;
+    top: 40px;
+    bottom: 0;
+    left: -180px;
+    width: 180px;
+    background-color: #fff;
+    transition: all .3s ease;
+    z-index:10;
+    //向左移动180px
+    &.show {
+        transform:translateX(180px);
+    }
+    //菜单项，垂直堆叠
+    .menu_list {
+        border-top:1px solid #80bd01;
+        li.menu_item {
+            a {
+                display: block;
+                padding: 14px 24px;
+                font-size: 1.4rem;
+                text-decoration: none;
+                i.iconfont {
+                    margin-right:30px;
+					color:#333;
+                }
+                .message_count {
+                    position: absolute;
+                    color: red;
+                    left: 40px;
+                    top: 15px;
+                }
+            }
+            a:hover {
+                background-color: #80bd01;
+				color:#fff;
+            }
+            &:nth-of-type(6){
+                border-top:1px solid #80bd01;
+            }
+        }
+    }
+}
