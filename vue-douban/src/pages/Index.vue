@@ -1,12 +1,35 @@
 <template>
     <div>
         <nv-header ref="header"></nv-header>
+		<div class="topic" v-scroll="loadMore">
+			<div class="topic_list" v-for="item in lists">
+				<router-link key="item.id" :to="{name:'topic',params:{id:item.id}}">
+					<img class="topic_author" :src="item.author.avatar_url">
+					<div class="topic_msg">
+						<span class="topic_loginname">{{ item.author.loginname }}</span>
+						<span class="topic_create_at">{{ item.reply_count }}/{{ item.visit_count }}</span>
+					</div>
+					<div class="topic_msg">
+						<span class="topic_loginname">{{item.create_at}}</span>
+						<span class="topic_create_at">{{item.last_reply_at}}</span>
+					</div>
+					<div class='topic_title'>
+						<span v-if="item.top == true" class="topic_tab_top">置顶</span>
+						<span v-else-if="item.tab == 'good'" class="topic_tab">精华</span>
+						<span v-else-if="item.tab == 'share'" class="topic_tab">分享</span>
+						<span v-else-if="item.tab == 'ask'" class="topic_tab">问答</span>
+						<span v-else-if="item.tab == 'job'" class="topic_tab">招聘</span>
+						<div class="list_item">{{item.title}}</div>
+					</div>
+				</router-link>
+			</div>
+		</div>
     </div>
 </template>
 
 <script>
 	import Header from '@/components/Header';
-	import $ from 'webpack-zepto';
+	import $ from 'webpack-zepto'
 
     export default {
         data:function(){
@@ -19,7 +42,22 @@
 				mdrender:false,
 				scrollDelay:false
             }
-        },
+		},
+		mounted : function(){
+			this.getTopicList();
+		},
+		watch: {
+			//监听路由变化
+			'$route'(to,from){
+				var v = this;
+				var tab = v.$route.query.tab;
+				//解决无限加载bug
+				if(v.tab != tab) v.page = 1;
+				v.tab = tab;
+				v.getTopicList();
+				v.$refs.head.show = false;
+			}
+		},
         components:{
             'nv-header' : Header
         },
@@ -46,7 +84,28 @@
 				this.getTopicList();
 			},
 			getTopicList:function(){
-				
+				var v = this;
+				if(v.page === 1){
+					v.lists = [];
+				}
+				v.$http.get('https://cnodejs.org/api/v1/topics',{
+					params:{
+						tab : v.tab,
+						page : v.page,
+						limit : v.limit
+					}
+				}).then(function(response){
+					// console.log(response.data.data);
+					response.data.data.map(function(item){ 
+						//设定时间格式
+						item.create_at = v.$filter.getDateDiff(new Date(item.create_at));
+						item.last_reply_at = v.$filter.getDateDiff(new Date(item.last_reply_at));
+					})
+					v.lists = v.lists.concat(response.data.data);
+					if(!response.data.data) console.log('没有更多内容了...');
+				}).catch(function(response){
+					console.log(response);
+				});
 			}
 		}
     }

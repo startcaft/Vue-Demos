@@ -13,3 +13,51 @@ body,html,ul,ol,li,dl,dd,dt,h1,h2,h3,h4,h5,h6,p,span,button,a,input,textarea,sel
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	outline: none;
 }
+
+.topic {
+	font-size: 1.4rem;
+	margin-top: 40px;
+	.topic_list {
+		padding: 10px;
+		border-bottom: 1px solid #80bd01;
+		overflow: hidden;
+		.topic_author {
+			float:left;
+			width:50px;
+			height:50px;
+			border-radius: 50%;
+			display: block;
+			margin-right:10px;
+		}
+		.topic_msg {
+			color:#778087;
+			overflow: hidden;
+			margin:5px 0;
+			.topic_create_at {
+				float: right;
+			}
+		}
+	}
+	.topic_title{
+		.topic_tab_top,.topic_tab{
+			font-size:1rem;
+			float:left;
+			border:1px solid red;
+			color:red;
+			display: block;
+			padding:2px 5px;
+			margin-right:5px;
+			border-radius: 3px;
+		}
+		.topic_tab{
+			border:1px solid #80bd01;
+			color:#80bd01;
+		}
+		.list_item{
+			line-height: 25px;
+			margin-top:10px;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+	}
+}
