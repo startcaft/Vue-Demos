@@ -1,5 +1,6 @@
 <template>
     <div>
+		<!--父组件引用子组件-->
         <nv-header ref="header"></nv-header>
 		<div class="topic" v-scroll="loadMore">
 			<div class="topic_list" v-for="item in lists">
@@ -24,11 +25,15 @@
 				</router-link>
 			</div>
 		</div>
+		<nv-top></nv-top>
+		<nv-loading ref="loading" :show="show"></nv-loading>
     </div>
 </template>
 
 <script>
-	import Header from '@/components/Header';
+	import Header from '@/components/Header'
+	import Loading from '@/components/Loading'
+	import BackTop from '@/components/BackTop'
 	import $ from 'webpack-zepto'
 
     export default {
@@ -55,11 +60,13 @@
 				if(v.tab != tab) v.page = 1;
 				v.tab = tab;
 				v.getTopicList();
-				v.$refs.head.show = false;
+				v.$refs.header.show = false;
 			}
 		},
         components:{
-            'nv-header' : Header
+			'nv-header' : Header,
+			'nv-loading' : Loading,
+			'nv-top' : BackTop
         },
         //自定义指令
 		directives:{
