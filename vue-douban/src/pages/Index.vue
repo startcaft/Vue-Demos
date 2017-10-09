@@ -1,7 +1,7 @@
 <template>
     <div>
 		<!--父组件引用子组件-->
-        <nv-header ref="header"></nv-header>
+        <nv-header ref="header" :tab="tab"></nv-header>
 		<div class="topic" v-scroll="loadMore">
 			<div class="topic_list" v-for="item in lists">
 				<router-link key="item.id" :to="{name:'topic',params:{id:item.id}}">
@@ -59,6 +59,7 @@
 				//解决无限加载bug
 				if(v.tab != tab) v.page = 1;
 				v.tab = tab;
+				// console.log(v.tab);
 				v.getTopicList();
 				v.$refs.header.show = false;
 			}

@@ -5,11 +5,7 @@
             <span class="menu_btn" @click="toggleMenu"></span>
             <span class="header_title">
                 <span class="vue_logo"></span>
-				<span class="headerbar_title" v-if="$route.query.tab == 'all'">全部</span>
-				<span class="headerbar_title" v-else-if="$route.query.tab == 'good'">精华</span>
-				<span class="headerbar_title" v-else-if="$route.query.tab == 'share'">分享</span>
-				<span class="headerbar_title" v-else-if="$route.query.tab == 'ask'">问答</span>
-				<span class="headerbar_title" v-else-if="$route.query.tab == 'job'">招聘</span>
+                <span class="headerbar_title">{{ title }}</span>
             </span>
             <router-link :to="{name:'login'}" v-if="!loginName" class="publish_btn">
                 <i class="iconfont icon-publish"></i>
@@ -31,6 +27,32 @@
                 show:false,
                 loginName:'',
                 // tab:'all'
+            }
+        },
+        //组件属性，接收一个tab属性，然后来计算顶部标题
+        props:{                        
+            tab:{
+                type:String,
+                default:'all'
+            }
+        },
+        computed:{
+            title : function(){
+                if(this.tab === 'all'){
+                    return '全部';
+                }
+                if(this.tab === 'good'){
+                    return '精华';
+                }
+                if(this.tab === 'share'){
+                    return '分享';
+                }
+                if(this.tab === 'ask'){
+                    return '问答';
+                }
+                if(this.tab === 'job'){
+                    return '招聘';
+                }
             }
         },
         mounted(){

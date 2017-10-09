@@ -50,11 +50,12 @@
 						</section>
 						<div class="reply_content markdown-body" v-html="item.content"></div>
 						<nv-reply v-if="loginName && replyId === item.id" 
-						:reply-to="item.author.loginname" 
-						:reply-id="item.id" 
-						:topic-id="topicId"
-						@getTopic="getTopic"
-						@onReply="handleReply"></nv-reply>
+                            :reply-to="item.author.loginname" 
+                            :reply-id="item.id" 
+                            :topic-id="topicId"
+                            @getTopic="getTopic"
+                            @onReply="handleReply">
+                        </nv-reply>
 					</li>
 				</ul>
 			</section>
