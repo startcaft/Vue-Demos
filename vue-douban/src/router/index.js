@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/pages/Index'
 import Login from '@/pages/Login'
 import Topic from '@/pages/Topic'
+import Message from '../pages/Message.vue'
 
 Vue.use(Router)
 
@@ -28,5 +29,11 @@ export default new Router({
       name: 'topic',
       component: Topic
     },
+    {
+      path: '/message',
+      name: 'message',
+      component: Message
+      // meta: { requiresAuth: true }
+    }
   ]
 })

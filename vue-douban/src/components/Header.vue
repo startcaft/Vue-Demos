@@ -53,6 +53,12 @@
                 if(this.tab === 'job'){
                     return '招聘';
                 }
+                if(this.tab === 'msg'){
+                    return '消息';
+                }
+                if(this.tab === 'login'){
+                    return '登录';
+                }
             }
         },
         mounted(){

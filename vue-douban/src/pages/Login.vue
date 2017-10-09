@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nv-header title="登陆"></nv-header>
+        <nv-header tab="login"></nv-header>
         <section class="login">
             <div class="login_token">
                 <input type="text" name="accesstoken" 
