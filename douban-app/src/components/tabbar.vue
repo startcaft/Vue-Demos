@@ -6,6 +6,14 @@
     </div>
 </template>
 
+<script>
+    export default {
+        //接收父组件传递的value
+        props:['value']
+    }
+</script>
+
+
 <style lang="less">
     .m-tabbar {
         display: flex;
