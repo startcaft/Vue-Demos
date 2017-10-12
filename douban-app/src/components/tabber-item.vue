@@ -1,6 +1,6 @@
 <template>
     <!--导航项组件-->
-    <div class="m-tabbar-item" :class="{'is-active':isActive}" @click="$parent.$emit('input',id)">
+    <div class="m-tabbar-item" :class="{'is-active':isActive}" @click="goToRouter">
         <a>
             <span class="m-tabbar-item-icon" v-show="!isActive">
                 <!--具名slot，分发默认图片-->
@@ -36,12 +36,31 @@
      * </m-tabber-item>
      */
     export default {
-        props:['id'],
+        props:{
+            id:{
+                type:String
+            },
+            isRouter:{
+                type:Boolean,
+                default:false
+            }
+        },
         computed:{
             isActive:function(){
                 if(this.$parent.value === this.id){
                     return true;
                 }
+            }
+        },
+        methods:{
+            goToRouter:function(){
+                this.$parent.$emit('input',this.id);//触发主页面的input属性，更新id值
+                //判断是否为路由跳转
+                if(this.isRouter){
+                    //根据id跳转到对应的路由页面
+                    this.$router.push(this.id);
+                }
+                
             }
         }
     }
