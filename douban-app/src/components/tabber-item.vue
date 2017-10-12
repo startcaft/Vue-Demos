@@ -49,6 +49,8 @@
 
 
 <style lang="less">
+    @import '../less/var.less';
+
     .m-tabbar-item {
         flex: 1;
         text-align: center;
@@ -70,7 +72,7 @@
         //导航项选中文字变色
         &.is-active {
             .m-tabbar-item-text {
-                color: #42bd56;
+                color: @tabbarActiveColor;
             }
         }
     }
