@@ -1,78 +1,138 @@
 <template>
     <div>
-        <m-header title="豆瓣app" :bg="true">
-            <a href="javascript:;" slot="left">
-                <img class="m-icon-img" src="../assets/images/ic_bar_back_white.png">
-                返回
-            </a>
-            <a href="javascript:;" slot="right">分享</a>
-        </m-header>
+        <!--首页顶部栏-->
+        <header class="m-header is-fixed is-bg top-search">
+            <div class="search-wrap">
+                <img src="../assets/images/ic_search_gray.png" alt="">
+                <span class="placeholder">影视 图书 唱片 小组 舞台剧等</span>
+                <img src="../assets/images/ic_scan_gray.png" alt="">
+            </div>
+            <div class="m-header-button is-right" style="text-align:center;width:50px;">
+                <a href="javascript:;">
+                    <img class="m-icon-img" src="../assets/images/ic_chat_white.png"/>
+                </a>
+            </div>
+        </header>
+        
         <div class="page-content">
-            <m-swiper swipeid="swipe01" :autoplay="1000" effect="cubu">
-                <div class="swiper-slide slide02" slot="swiper-on">Slide 1</div>
-                <div class="swiper-slide slide01" slot="swiper-on">Slide 2</div>
-                <div class="swiper-slide slide03" slot="swiper-on">Slide 3</div>
+            <!--轮播-->
+            <m-swiper swipeid="swipe01" :autoplay="1000" paginationDirection="right">
+                <div class="swiper-slide" slot="swiper-on">
+                    <img src="../assets/images/banner/01.jpg" alt="">
+                </div>
+                <div class="swiper-slide " slot="swiper-on">
+                    <img src="../assets/images/banner/02.jpg" alt="">
+                </div>
+                <div class="swiper-slide " slot="swiper-on">
+                    <img src="../assets/images/banner/03.jpg" alt="">
+                </div>
             </m-swiper>
-            <m-swiper swipeid="swipe021" :loop="false" paginationType="fraction" :autoplay="2000">
-                <div class="swiper-slide slide02" slot="swiper-on">Slide 1</div>
-                <div class="swiper-slide slide01" slot="swiper-on">Slide 2</div>
-                <div class="swiper-slide slide03" slot="swiper-on">Slide 3</div>
-            </m-swiper>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
-            <p>asdasdas</p>
+            <m-cell title="提醒" icon>
+                <img src="../assets/images/ic_mine_notification.png" slot="icon">
+                <a href="javascript:;" slot="cell-right">
+                    <img src="../assets/images/ic_arrow_gray_small.png" alt="">
+                </a>
+            </m-cell>
+            <m-cell title="设置">
+                <a href="javascript:;" slot="cell-right">
+                    <img src="../assets/images/ic_arrow_gray_small.png" alt="">
+                </a>
+            </m-cell>
+            <!--热门-->
+            <div class="hot-wrap">
+                <m-cell title="热门" label="hot">
+                    <!--<a href="javascript:;" slot="cell-right">更多<img src="../../assets/images/ic_arrow_gray_small.png" alt=""></a>-->
+                </m-cell>
+                <m-cell-media :author="item.target.author.name" :column="item.source_cn" :img="item.target.cover_url" v-for="(item,index) in hotData"
+                    :key="item.id">
+                    <span slot="title">{{item.title}}</span>
+                    <span slot="describe">{{item.target.desc}}</span>
+                </m-cell-media>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Header from '../components/header.vue'
     import Swiper from '../components/swiper.vue'
+    import Mcell from '../components/cell.vue'
+    import McellMedia from '../components/cell-media.vue'
 
     export default {
         components : {
-            'm-header' : Header,
-            'm-swiper' : Swiper
+            'm-swiper' : Swiper,
+            'm-cell' : Mcell,
+            'm-cell-media' : McellMedia
+        },
+        data(){
+            return {
+                recommendData: [],
+                hotData: []
+            }
+        },
+        created(){
+            this.fetchData();
+        },
+        methods:{
+            fetchData(){
+                this.axios.get('/api/homeData')
+                    .then((response) => {
+                        let data = response.data.data.recommend_feeds;
+                        let recommend = [];
+                        let hot = [];
+                        for(let i in data){
+                            if(data[i].card && data[i].card.name == '为你推荐'){
+                                recommend.push(data[i]);
+                            }
+                            else {
+                                hot.push(data[i]);
+                            }
+                        }
+
+                        this.recommendData = recommend;
+                        this.hotData = hot;
+                    })
+            }
         }
     }
 </script>
 
 
 <style lang="less">
-    .is-fixed ~ .page-content{
-        padding-top:44px;
+    header.m-header {
+        padding: 0 0 0 10px;
     }
-    .slide01{
-        background: #41b883;
-        text-align: center;
-        line-height: 200px;
-        font-size: 30px;
-        color: #fff;
+    .is-fixed~.page-content {
+        padding-top: 44px;
+        padding-bottom: 50px;
     }
-    .slide02{
-        background: #364a60;
-        text-align: center;
-        line-height: 200px;
-        font-size: 30px;
-        color: #fff;
+
+    .top-search {
+        .search-wrap {
+            width: 100%;
+            height: 30px;
+            background: #fff;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #c0c0c0;
+            padding: 0 12px;
+            .placeholder {
+                flex: 1;
+                text-align: left;
+                padding-left: 12px;
+            }
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
-    .slide03{
-        background: #ea6f5a;
-        text-align: center;
-        line-height: 200px;
-        font-size: 30px;
-        color: #fff;
+    
+    .hot-wrap,
+    .recommend-wrap {
+        padding-top: 12px;
     }
 </style>
 

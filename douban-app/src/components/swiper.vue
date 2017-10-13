@@ -72,6 +72,9 @@
 
 <style>
     @import '../assets/lib/swiper/css/swiper.css';
+    .swiper-container img{
+        width: 100%
+    }
     .swiper-pagination-bullet-active {
         background: #fff;
     }

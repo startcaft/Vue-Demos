@@ -21,13 +21,25 @@
 
     .m-header {
         display: flex;
-        align-items: center;//垂直居中
+        align-items: center;
         height: 44px;
         padding: 0 10px;
         background: #fff;
         color: @headerDefaultColor;
-        border-bottom: 1px solid #eee;
-        //导航按钮
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 1px;
+            background: @headerBorderColor;
+            transform: scaleY(0.5);
+        }
+        a {
+            color: @headerDefaultColor;
+        }
         .m-header-button {
             width: 70px;
             align-items: stretch;
@@ -45,28 +57,35 @@
                 margin-right: 10px;
             }
         }
-        a {
-            color: @headerDefaultColor;
-        }
-        //中间件文本，自适应
         .m-header-title {
             flex: 1;
             text-align: center;
             font-size: 16px;
-            text-overflow: ellipsis;//文本过长则显示...
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
-        //如果为背景，则文字都变成白色
         &.is-bg {
-            background:@headerBg;
+            background: @headerBg;
             color: #fff;
-            a {
-                color: #fff;
-            }
-            .m-header-title{
-                color: #fff;
-            }
+        a {
+            color: #fff;
         }
-        &.is_fixed {
+        .m-header-title {
+            color: #fff;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 0px;
+            background: @headerBorderColor;
+            transform: scaleY(0.5);
+        }
+        }
+        &.is-fixed {
             position: fixed;
             left: 0;
             right: 0;
@@ -94,18 +113,22 @@
      * </m-header>
      */
     export default {
-        props:{
-            title:{
-                type:String,
-                default:''
+        props: {
+            title: {
+                type: String,
+                default: ''
             },
-            bg:{
-                type:Boolean,
-                default:false
+            bg: {
+                type: Boolean,
+                default: false
             },
-            fixed:{
-                type:Boolean,
-                default:false
+            fixed: {
+                type: Boolean,
+                default: false
+            },
+            leftShow: {
+                type: Boolean,
+                default: true
             }
         }
     }
