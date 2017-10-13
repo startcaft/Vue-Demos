@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <loading v-if="$store.state.loading"></loading>
     <router-view/>
     <!--
           v-mode绑定的属性值将传递到子组件定义的value属性上
@@ -46,11 +47,12 @@
 <script>
     import Tabbar from './components/tabbar.vue'
     import TabbarItem from './components/tabber-item.vue'
+
     export default {
       name: 'app',
       components : {
           'm-tabbar' : Tabbar,
-          'm-tabbar-item' : TabbarItem,
+          'm-tabbar-item' : TabbarItem
       },
       data(){
           return {
