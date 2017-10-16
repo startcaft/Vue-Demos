@@ -6,8 +6,8 @@
                 <el-table :data="tableData" border style="width: 100%">
                     <el-table-column prop="goodsName" label="名称" min-width="100"></el-table-column>
                     <el-table-column label="数量" align="center">
-                        <template scope="scope">
-                            <el-input-number size="small" v-model="scope.row.count" @change="changeCount" :min="0"></el-input-number>
+                        <template slot-scope="scope">
+                            <el-input-number size="small" v-model="scope.row.count" :min="0"></el-input-number>
                         </template>
                     </el-table-column>
                     <el-table-column prop="price" label="单价" align="center"></el-table-column>
@@ -122,6 +122,21 @@
                 totalMoney : 0
             }
         },
+        watch : {
+            tableData: {
+        　　　　handler(newValue, oldValue) {
+                    for(let i = 0;i<newValue.length;i++){
+                        //console.log(newValue[i].count);
+                        if(newValue[i].count === 0){
+                            console.log('0出现了');
+                            newValue.splice(i,1);
+                            break;
+                        }
+                    }
+        　　　　},
+        　　　　deep: true
+        　　}
+        },
         components : {
             'my-load' : Loading
         },
@@ -149,22 +164,9 @@
                 }
 
                 //计算价格
-                this.getAllMoney(false);
+                this.getAllMoney();
             },
-            getAllMoney(needDel){
-                console.log(needDel);
-                //需要删除数量为0的商品
-                if(needDel){
-                    for(let i=0;i<this.tableData.length;i++){
-                        // if(this.tableData[i].count === 0){
-                        //     console.log(this.tableData[i]);
-                        //     break;
-                        // }
-                        console.log(this.tableData[i]);
-                        console.log(this.tableData[i].count);
-                    }
-                }
-
+            getAllMoney(){
                 this.totalMoney=0;
                 //先判是否有商品数量 <=0 如果有，直接删除该条记录
                 //然后在计算价格
@@ -174,14 +176,6 @@
                         this.totalMoney=this.totalMoney+(element.price*element.count);   
                     });
                 }
-            },
-            changeCount(newCount){
-                let needDel = false;
-                if(newCount === 0 ){
-                    needDel = true;
-                    //console.log(newCount);
-                }
-                this.getAllMoney(needDel);
             }
         },
         created(){
