@@ -133,6 +133,7 @@
                             break;
                         }
                     }
+                    this.getAllMoney();
         　　　　},
         　　　　deep: true
         　　}
