@@ -241,6 +241,7 @@
                 flex-wrap: wrap;
                 justify-content: flex-start;
                 margin: 10px;
+                align-content : center;
                 li {
                     flex: none;
                     padding: 2px;
@@ -248,12 +249,13 @@
                     text-align: center;
                     a {
                         display: block;
+                        cursor: pointer;
                         .el-tag {
                             text-overflow:ellipsis;
                             overflow:hidden;
                             white-space:nowrap;
                             width:150px;
-                        }
+                        }  
                     }
                 }
             }
@@ -271,6 +273,7 @@
                     img {
                         height: 60px;
                         width: 60px;
+                        cursor: pointer;
                     }
                     .foodText {
                         display: flex;
