@@ -2,6 +2,7 @@
 const SHOW_SIDEBAR = true;
 const HIDE_SIDEBAR = false;
 
+//vuex sideBar模块
 const sideBar = {
     state : {
         isShow : false

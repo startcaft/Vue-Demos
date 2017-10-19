@@ -42,9 +42,8 @@
                 </div>
 
                 <!--底部-->
-                <div class="footer">
-					<p class="border-1px"></p>
-					<div class="nightmode">
+                <div class="bottom-footer">
+					<!-- <div class="nightmode">
 						<i class="iconfont icon-yejianmoshi"></i>
 						<span>夜间模式</span>
 					</div>
@@ -55,7 +54,7 @@
 					<div class="exit">
 						<i class="iconfont icon-tuichu0808"></i>
 						<span>退出</span>
-					</div>
+					</div> -->
 				</div>
             </div>
         </transition>
@@ -179,57 +178,20 @@
 				    display:block;
 				    padding-bottom:40px;
                 }
-                //固定在底部
-                .footer {
-                    background:red;
-				    position:fixed;
-                    transform:translateZ(0);
-				    bottom:0;
-				    height:40px;
-				    width:286px;
-				    font-size:0;
-                    background:#fff;
-                    .border-1px {
-                        position: relative;
-                        &::after {
-                            display: block;
-                            position: absolute;
-                            left: 0;
-                            bottom: 0;
-                            width: 100%;
-                            border-top: 1px solid #e4e4e4;
-                            content: ' ';
-                        }
-                    }
-                    div {
-                        display:inline-block;
-                        font-size:16px;
-                        height:100%;
-                        text-align:center;
-                        i {
-                            color:@icon_color;
-						    font-size:18px;
-						    vertical-align:middle;
-                        }
-                        span {
-                            font-size:16px;
-						    vertical-align:middle;
-                        }
-                        &:active{
-                            background:@list_active;
-                        }
-                        &.nightmode {
-                            width:40%;
-						    line-height:40px;
-                        }
-                        &.setting,&.exit{
-						    width:30%;
-                            line-height:40px;
-                        }
-                    }
-                }
             }
         }
+    }
+
+    .sidebar .menu-content .bottom-footer {
+        position:fixed;
+        transform:translateZ(0);
+        bottom:0;
+        height:40px;
+        width:286px;
+        font-size:0;
+        background:#fff;
+        border-top: 1px solid #eee;
+        display: flex;
     }
 </style>
 
@@ -268,6 +230,7 @@
         },
         computed:{
             isReallShow : function(){
+                //模块内部的 action、mutation、和 getter 现在仍然注册在全局命名空间——这样保证了多个模块能够响应同一 mutation 或 action。
                 return this.$store.getters.isShowMethod
             }
         }
