@@ -172,40 +172,41 @@
         methods:{
             hideMusicList(){
                 this.$store.dispatch({
-                    type:'hideMusicList'
+                    type:'musiclist/hideMusicList'
                 })
             },
             playIndex (index) {
 				this.$store.dispatch({
-					type: 'play_Index',
+					type: 'audioInfo/play_Index',
 					index: index
 				})
 				this.$store.dispatch({
-					type: 'hideMusicList'
+					type: 'musiclist/hideMusicList'
 				})
 			},
             //播放模式切换
             setPlayType(){
-                this.$store.dispatch('set_PlayType');
+                this.$store.dispatch('audioInfo/set_PlayType');
             }
         },
         computed:{
             //getIsShowMusicList在musiclist.js中，在bottom-bar组建中切换状态
             isShowMusicList(){
-                return this.$store.getters.getIsShowMusicList;
+                return this.$store.getters['musiclist/getIsShowMusicList'];
             },
             //播放列表
             musiclist () {
-				return this.$store.getters.getMusicList;
+				return this.$store.getters['audioInfo/getMusicList'];
             },
             getCurrentIndex () {
-				return this.$store.getters.getCurrentIndex;
+				return this.$store.getters['audioInfo/getCurrentIndex'];
             },
             getScrollTop () {
-				return this.$store.getters.getScrollTop;
+				return this.$store.getters['musiclist/getScrollTop'];
 			},
             musicPlayType(){
-                let playType = this.$store.getters.getMusicPlayType ? this.$store.getters.getMusicPlayType : -1;
+                let playType = this.$store.getters['audioInfo/getMusicPlayType'] ? 
+                                    this.$store.getters['audioInfo/getMusicPlayType'] : -1;
                 let className = '';
                 switch(playType){
                     case 1:
@@ -229,7 +230,7 @@
         mounted(){
             //记录 歌曲列表的ul元素的scrollTop值，在于隐藏和现实歌曲列表是永远保持在上一次的滚动的地方。
             this.$store.dispatch({
-                type: 'set_RefScrollMusicList',
+                type: 'musiclist/set_RefScrollMusicList',
 				refs: this.$refs.musiclistContent
             })
         }

@@ -1,7 +1,9 @@
 /**
- * store模块之audio.js，主要是控制<audio>的播放/暂停，随机播放/循环播放/单曲循环 等一系列播放器控制方法
+ * store模块之audio.js，主要是控制<audio>的播放/暂停，随机播放/循环播放/单曲循环 等一系列播放器控制方法,
+ * 该模块开启了命名空间
  */
 const audioInfo = {
+	namespaced : true,
     state : {
         //audio元素
         audioElement : '',

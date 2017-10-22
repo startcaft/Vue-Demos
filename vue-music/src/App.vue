@@ -44,18 +44,18 @@
       musicTimeUpdate(){
         //action载荷，将当前更新的事件传递给action
         this.$store.dispatch({
-          type:'set_CurrentTime',
+          type:'audioInfo/set_CurrentTime',
           time:Math.floor(this.$refs.audio.currentTime)
         })
 
         //设置歌词内容（以索引的形式显示）
-        let musicLrc = this.$store.getters.getCurrentMusic.lyric;
+        let musicLrc = this.$store.getters['audioInfo/getCurrentMusic'].lyric;
         let currentTime = Math.floor(this.$refs.audio.currentTime);
         if(musicLrc[musicLrcIndex] == undefined) return;
 
         if(musicLrc.length === 0){
           this.$store.commit({
-            type:'setLyricIndex',
+            type:'audioInfo/setLyricIndex',
             index: -1
           })
           return
@@ -77,32 +77,32 @@
         }
 
         this.$store.commit({
-          type : 'setLyricIndex',
+          type : 'audioInfo/setLyricIndex',
           index : musicLrcIndex
         });
       },
       //可以播放事件
       musicCanPlay(){
         this.$store.dispatch({
-          type: 'set_MusicDuration',
+          type: 'audioInfo/set_MusicDuration',
           duration: Math.floor(this.$refs.audio.duration)
         });
         this.$store.commit({
-          type: 'setMusicLoadStart',
+          type: 'audioInfo/setMusicLoadStart',
           isloadstart: false
         })
       },
       //音乐处于播放状态
       musicOnPlaying(){
-        this.$store.commit('play')
+        this.$store.commit('audioInfo/play')
       },
       //音乐播放结束事件
       musicEnded(){
-        this.$store.dispatch('play_Ended');
+        this.$store.dispatch('audioInfo/play_Ended');
         //歌词初始化
         musicLrcIndex = 0;
         this.$store.commit({
-          type:'setLyricIndex',
+          type:'audioInfo/setLyricIndex',
           index : 0
         })
       },
@@ -112,12 +112,12 @@
       },
       // 音乐处于暂停状态
       musicOnPause () {
-        this.$store.commit('pause')
+        this.$store.commit('audioInfo/pause')
       },
       // 音乐加载
       loadStart () {
         this.$store.commit({
-          type: 'setMusicLoadStart',
+          type: 'audioInfo/setMusicLoadStart',
           isloadstart: true
         })
       }
@@ -131,17 +131,17 @@
         
         //把所有的音乐数据传递给vuex的musicAllList
         console.log(res.data.music);
-        this.$store.dispatch('set_MusicAllList',res.data.music);
+        this.$store.dispatch('audioInfo/set_MusicAllList',res.data.music);
 
         // 所有的数据存起来  包括音乐个人信息 等等
         console.log(res.data);
         this.$store.dispatch('set_AllInfo', res.data)
 
         //设置音乐的地址
-        this.$refs.audio.setAttribute('src',this.$store.getters.getCurrentMusic.url);
+        this.$refs.audio.setAttribute('src',this.$store.getters['audioInfo/getCurrentMusic'].url);
 
         // 给audio元素存在vuex 的state里面  方便日后调用
-        this.$store.dispatch('set_AudioElement', this.$refs.audio)
+        this.$store.dispatch('audioInfo/set_AudioElement', this.$refs.audio)
       },(err) => {
         throw new Error(err);
       })

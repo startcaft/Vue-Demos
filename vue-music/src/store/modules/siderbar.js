@@ -4,6 +4,7 @@ const HIDE_SIDEBAR = false;
 
 //vuex sideBar模块
 const sideBar = {
+    namespaced : true,
     state : {
         isShow : false
     },

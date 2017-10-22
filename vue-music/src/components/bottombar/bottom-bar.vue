@@ -163,38 +163,38 @@
 			},
             // 获取音乐封面地址
             musicImage(){
-                return this.$store.getters.getCurrentMusic ? this.$store.getters.getCurrentMusic.img_url : ''
+                return this.$store.getters['audioInfo/getCurrentMusic'] ? this.$store.getters['audioInfo/getCurrentMusic'].img_url : ''
             },
             // 获取歌手名称
             musicSinger(){
-                return this.$store.getters.getCurrentMusic ? this.$store.getters.getCurrentMusic.singer : ''
+                return this.$store.getters['audioInfo/getCurrentMusic'] ? this.$store.getters['audioInfo/getCurrentMusic'].singer : ''
             },
             // 获取音乐名称
 			musicName () {
-				return this.$store.getters.getCurrentMusic ? this.$store.getters.getCurrentMusic.name : ''
+				return this.$store.getters['audioInfo/getCurrentMusic'] ? this.$store.getters['audioInfo/getCurrentMusic'].name : ''
 			}
         },
         methods:{
             //控制播放器的播放和暂停
             playpause(){
-                this.$store.commit('togglePlay');
+                this.$store.commit('audioInfo/togglePlay');
             },
             //显示音乐详细，只是改变store模块中audio中的是否显示状态
             showMusicDetail(){
                 this.$store.dispatch({
-					type: 'set_MusicDetail',
+					type: 'audioInfo/set_MusicDetail',
 					isShow: true
 				})
             },
             //显示播放列表，只是改变store模块中musiclist的isShow状态
             showMusicList(){
-                let scrollTop = (this.$store.getters.getCurrentIndex + 1 - 3) * 42;
+                let scrollTop = (this.$store.getters['audioInfo/getCurrentIndex'] + 1 - 3) * 42;
                 console.log(scrollTop);
                 this.$store.dispatch({
-                    type: 'set_ScrollTop',
+                    type: 'musiclist/set_ScrollTop',
 					scrollTop: scrollTop
                 })
-                this.$store.dispatch('showMusicList');
+                this.$store.dispatch('musiclist/showMusicList');
             }
         }
     }

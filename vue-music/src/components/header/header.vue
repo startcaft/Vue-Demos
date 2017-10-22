@@ -36,12 +36,12 @@
         methods:{
             showMenu(){
                 this.$store.dispatch({
-                    type : 'showSideBar'
+                    type : 'sidebar/showSideBar'
                 })
             },
             hideMenu(){
                 this.$store.dispatch({
-                    type : 'hideSideBar'
+                    type : 'sidebar/hideSideBar'
                 })
             }
         }

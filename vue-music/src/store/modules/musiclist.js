@@ -4,6 +4,7 @@ const SHOW_MUSIC_LIST = true;
 const HIDE_MUSIC_LIST = false;
 
 const musiclist = {
+    namespaced : true,
     state : {
         scrollTop:0,    //<ul>上滚动的scrollTop值
         refs : '',      //歌曲列表<ul>元素

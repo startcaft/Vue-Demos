@@ -220,7 +220,7 @@
         methods:{
             hideMenu(){
                 this.$store.dispatch({
-                    type : 'hideSideBar'
+                    type : 'sidebar/hideSideBar'
                 })
             },
             signClick(){
@@ -231,7 +231,7 @@
         computed:{
             isReallShow : function(){
                 //模块内部的 action、mutation、和 getter 现在仍然注册在全局命名空间——这样保证了多个模块能够响应同一 mutation 或 action。
-                return this.$store.getters.isShowMethod
+                return this.$store.getters['sidebar/isShowMethod']
             }
         }
     }
