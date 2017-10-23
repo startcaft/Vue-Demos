@@ -9,6 +9,10 @@
     <v-header :index="2"></v-header>
     <!--侧边栏-->
     <v-side :info="info"></v-side>
+
+    <!-- 我的音乐  首页 -->
+    <my-music></my-music>
+
     <!-- 底部显示的浮层页  音乐列表 -->
     <music-list></music-list>
     <!-- 底部固定页 -->
@@ -21,6 +25,7 @@
   import sidebar from './components/sidebar/sidebar.vue'
   import bottomBar from './components/bottombar/bottom-bar.vue'
   import musicList from './components/musiclist/musiclist.vue'
+  import myMusic from './components/mymusic/mymusic.vue'
   import store from './store/index.js'
   import axios from 'axios'
 
@@ -37,7 +42,8 @@
       "v-header" : header,
       'v-side' : sidebar,
       'bottom-bar' : bottomBar,
-      'music-list' : musicList
+      'music-list' : musicList,
+      'my-music' : myMusic
     },
     methods:{
       //播放时间更新
