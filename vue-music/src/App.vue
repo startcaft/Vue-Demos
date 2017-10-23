@@ -140,7 +140,7 @@
         this.$store.dispatch('audioInfo/set_MusicAllList',res.data.music);
 
         // 所有的数据存起来  包括音乐个人信息 等等
-        console.log(res.data);
+        //console.log(res.data);
         this.$store.dispatch('set_AllInfo', res.data)
 
         //设置音乐的地址
@@ -172,6 +172,9 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50
+    color: #2c3e50;
+    ::-webkit-scrollbar {
+      display: none;/*隐藏滚轮*/
+    }
   }
 </style>

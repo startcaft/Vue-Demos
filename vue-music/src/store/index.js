@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Sidebar from './modules/siderbar.js'
 import AudioInfo from './modules/audio.js'
 import MusicList from './modules/musiclist.js'
+import MenuList from './modules/menulist'
 
 Vue.use(Vuex)
 
@@ -34,7 +35,8 @@ const store = new Vuex.Store({
     modules:{
         sidebar : Sidebar,
         audioInfo : AudioInfo,
-        musiclist : MusicList
+        musiclist : MusicList,
+        menulist : MenuList
     }
 });
 
