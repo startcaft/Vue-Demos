@@ -16,6 +16,7 @@
         methods : {
             onFileChange(e){
                 let files = e.target.files || e.dataTransfer.files;
+                //console.log(files);
                 if(!files.length){
                     return this.createImage(files);
                 }
@@ -24,8 +25,9 @@
                 let vm = this;
                 let reader = null;
                 reader = new window.FileReader();
-                reader.readerAsDataURL(file[0]);
+                reader.readAsDataURL(file[0]);
                 reader.onload = function(e){
+                    console.log(e.target.result);
                     vm.pictureUrl = e.target.result;
                 }
             }
