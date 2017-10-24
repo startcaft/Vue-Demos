@@ -35,17 +35,15 @@
 <style lang="less">
     // 注释掉的代码会影响子元素的 z-index，导致menu-list 组件无法覆盖 bottom-bar组件
     .my-music {
-        // position:fixed;
+        position:fixed;
         background:#fff;
-        margin-top: 50px;
-        height: 100%;
 		overflow:auto;
-		// top:50px;
-		// bottom:46px;
-		// left:0;
-		// right:0;
-        // z-index:9;
-        -webkit-overflow-scrolling:touch;
+		top:50px;
+		bottom:46px;
+		left:0;
+		right:0;
+		z-index:9;
+		-webkit-overflow-scrolling:touch;
     }
 </style>
 

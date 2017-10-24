@@ -107,7 +107,16 @@
                     }
                 }
                 .border-1px {
-                    border-top: 1px solid #eee;
+                    position: relative;
+                    &::after {
+                        display: block;
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        border-top: 1px solid #848484;
+                        content: ' ';
+                    }
                 }
             }
             .container {
@@ -130,7 +139,16 @@
 					color:#666;
 					overflow:hidden;
                     .border-1px {
-                        border-top: 1px solid #eee;
+                        position: relative;
+                        &::after {
+                            display: block;
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            width: 100%;
+                            border-top: 1px solid #848484;
+                            content: ' ';
+                        }
                     }
                     &:active {
                         background:@list_active;

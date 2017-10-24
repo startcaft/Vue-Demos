@@ -220,7 +220,20 @@
                         ]
                     }
                 })
-            }
+            },
+            //显示歌单的详细页面
+            showSongSheet (data) {
+                // 歌单列表数据
+				this.$store.dispatch({
+					type: 'audioInfo/set_MusicSheetList',
+					data: data
+                })
+                // 是否显示歌单信息区域
+				this.$store.commit({
+					type: 'audioInfo/setIsShowSongSheet',
+					isShow: true
+				})
+			}
         }
     }
 </script>

@@ -10,13 +10,17 @@
     <!--侧边栏-->
     <v-side :info="info"></v-side>
 
-    <!-- 我的音乐  首页 -->
-    <my-music></my-music>
-
     <!-- 底部显示的浮层页  音乐列表 -->
     <music-list></music-list>
     <!-- 底部固定页 -->
     <bottom-bar></bottom-bar>
+
+    <!-- 我的音乐  首页，注意这里的my-music组件应该放在bottom-bar组件后面，因为他们有相同的z-index，my-music组件中也有子元素使用z-index，保证子元素覆盖bottom-bar -->
+    <my-music></my-music>
+
+    <!-- 歌单详情页 -->
+    <song-sheet></song-sheet>
+
   </div>
 </template>
 
@@ -26,6 +30,7 @@
   import bottomBar from './components/bottombar/bottom-bar.vue'
   import musicList from './components/musiclist/musiclist.vue'
   import myMusic from './components/mymusic/mymusic.vue'
+  import songSheet from './components/songsheet/songsheet.vue'
   import store from './store/index.js'
   import axios from 'axios'
 
@@ -43,7 +48,8 @@
       'v-side' : sidebar,
       'bottom-bar' : bottomBar,
       'music-list' : musicList,
-      'my-music' : myMusic
+      'my-music' : myMusic,
+      'song-sheet' : songSheet
     },
     methods:{
       //播放时间更新
@@ -173,8 +179,5 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    ::-webkit-scrollbar {
-      display: none;/*隐藏滚轮*/
-    }
   }
 </style>
