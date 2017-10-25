@@ -21,6 +21,9 @@
     <!-- 歌单详情页 -->
     <song-sheet></song-sheet>
 
+    <!-- 音乐播放详情  显示cd页 -->
+    <music-detail></music-detail>
+
   </div>
 </template>
 
@@ -31,6 +34,7 @@
   import musicList from './components/musiclist/musiclist.vue'
   import myMusic from './components/mymusic/mymusic.vue'
   import songSheet from './components/songsheet/songsheet.vue'
+  import musicDetail from './components/musicdetail/musicdetail.vue'
   import store from './store/index.js'
   import axios from 'axios'
 
@@ -49,7 +53,8 @@
       'bottom-bar' : bottomBar,
       'music-list' : musicList,
       'my-music' : myMusic,
-      'song-sheet' : songSheet
+      'song-sheet' : songSheet,
+      'music-detail' : musicDetail
     },
     methods:{
       //播放时间更新
