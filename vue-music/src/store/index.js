@@ -4,6 +4,7 @@ import Sidebar from './modules/siderbar.js'
 import AudioInfo from './modules/audio.js'
 import MusicList from './modules/musiclist.js'
 import MenuList from './modules/menulist'
+import Reconmmed from './modules/reconmmend'
 
 Vue.use(Vuex)
 
@@ -18,8 +19,8 @@ const store = new Vuex.Store({
     },
     getters : {
         getAllInfo : state => state.allInfo,
-        //获取推荐歌单信息
-        // getFindMusic : state => state.mu
+        // 获取推荐歌单信息
+        getFindMusic: state => state.audioInfo.musicAllList.findmusic
     },
     mutations : {
         setAllInfo(state,obj){
@@ -36,7 +37,8 @@ const store = new Vuex.Store({
         sidebar : Sidebar,
         audioInfo : AudioInfo,
         musiclist : MusicList,
-        menulist : MenuList
+        menulist : MenuList,
+        reconmmed : Reconmmed
     }
 });
 
