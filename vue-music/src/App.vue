@@ -140,19 +140,20 @@
       }
     },
     created(){
-      let localApi = 'static/data.json';
-      axios.get(localApi).then((res) => {
+      //let localApi = 'static/data.json';
+      axios.get('/api/music').then((res) => {
+        //console.log(res);
         //用户信息
-        this.info = res.data.user;
+        this.info = res.data.data.user;
         // console.log(this.info)
         
         //把所有的音乐数据传递给vuex的musicAllList
-        console.log(res.data.music);
-        this.$store.dispatch('audioInfo/set_MusicAllList',res.data.music);
+        // console.log(res.data.data.music);
+        this.$store.dispatch('audioInfo/set_MusicAllList',res.data.data.music);
 
         // 所有的数据存起来  包括音乐个人信息 等等
         //console.log(res.data);
-        this.$store.dispatch('set_AllInfo', res.data)
+        this.$store.dispatch('set_AllInfo', res.data.data)
 
         //设置音乐的地址
         this.$refs.audio.setAttribute('src',this.$store.getters['audioInfo/getCurrentMusic'].url);
