@@ -3,6 +3,8 @@
 
 // 引入 nodejs 的 path 模块
 const path = require('path');
+// 引入 uglifyjs-webpack-plugin
+const unlify = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     // 入口文件的配置项
@@ -30,7 +32,9 @@ module.exports = {
     },
 
     // 插件：特定的功能插件
-    plugins:[],
+    plugins:[
+        new unlify()
+    ],
 
     // 配置webpack开发服务以及热更新
     devServer:{
