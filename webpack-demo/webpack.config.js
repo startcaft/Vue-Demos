@@ -7,7 +7,9 @@ module.exports = {
     // 入口文件的配置项
     entry:{
         // 这里的 entryFile 随意
-        entryFile:'./src/entry.js'
+        entryFile:'./src/entry.js',
+        // 多入口文件配置
+        entryFile2:'./src/entry2.js'
     },
 
     // 出口文件的配置项
@@ -15,7 +17,7 @@ module.exports = {
         // 指定打包的路径
         path:path.resolve(__dirname,'dist'),
         // 指定文件名
-        filename:'bundle.js'
+        filename:'[name].js'
     },
 
     // 模块：列入解析CSS，图片路径转换等
