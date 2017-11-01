@@ -3,14 +3,17 @@
 
 // 引入 nodejs 的 path 模块
 const path = require('path');
-// 引入 uglifyjs-webpack-plugin
+// 引入 uglifyjs-webpack-plugin js压缩插件模块
 const unlify = require('uglifyjs-webpack-plugin');
+// 引入 html-webpack-plugin HTML打包插件模块
+const htmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     // 入口文件的配置项
     entry:{
         // 这里的 entryFile 随意
         entryFile:'./src/entry.js',
+        entryFile2:'./src/entry2.js'
     },
 
     // 出口文件的配置项
@@ -18,7 +21,7 @@ module.exports = {
         // 指定打包的路径
         path:path.resolve(__dirname,'dist'),
         // 指定文件名
-        filename:'bundle.js'
+        filename:'[name].js'
     },
 
     // 模块：列入解析CSS，图片路径转换等
@@ -33,7 +36,16 @@ module.exports = {
 
     // 插件：特定的功能插件
     plugins:[
-        new unlify()
+        // js压缩插件，生产环境下作用，webpack-dev-server 会冲突
+        new unlify(),
+        // HTML发布插件
+        new htmlPlugin({
+            minify:{
+                removeAttributeQuotes:true
+            },
+            hash:true,
+            template:'./src/index.html'
+        })
     ],
 
     // 配置webpack开发服务以及热更新
