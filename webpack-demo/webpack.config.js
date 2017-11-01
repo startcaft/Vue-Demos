@@ -30,6 +30,18 @@ module.exports = {
             {
                 test : /\.css$/,
                 use:['style-loader','css-loader']
+            },
+            {
+                test : /\.(png|jpg|gif)/,
+                use : [
+                    {
+                        // url-loader 封装了 file-loader，所以 file-loader 在这里可以不用配置
+                        loader:'url-loader',
+                        options:{
+                            limit:500000
+                        }
+                    }
+                ]
             }
         ]
     },

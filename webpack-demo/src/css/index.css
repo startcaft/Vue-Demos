@@ -1,3 +1,9 @@
 body {
     background-color: red;
 }
+
+#img {
+    background-image: url('../images/manhua.png');
+    width: 466px;
+    height: 453px;
+}
