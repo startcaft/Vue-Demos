@@ -20,7 +20,14 @@ module.exports = {
     },
 
     // 模块：列入解析CSS，图片路径转换等
-    module:{},
+    module:{
+        rules:[
+            {
+                test : /\.css$/,
+                use:['style-loader','css-loader']
+            }
+        ]
+    },
 
     // 插件：特定的功能插件
     plugins:[],
