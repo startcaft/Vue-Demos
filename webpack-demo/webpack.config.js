@@ -7,6 +7,12 @@ const path = require('path');
 const unlify = require('uglifyjs-webpack-plugin');
 // 引入 html-webpack-plugin HTML打包插件模块
 const htmlPlugin = require('html-webpack-plugin');
+// 引入 extract-text-webpack-plugin 单独打包CSS插件
+const extractTextPlugin = require('extract-text-webpack-plugin');
+
+const website = {
+    publicPath:'http://localhost:8888/'
+}
 
 module.exports = {
     // 入口文件的配置项
@@ -21,7 +27,8 @@ module.exports = {
         // 指定打包的路径
         path:path.resolve(__dirname,'dist'),
         // 指定文件名
-        filename:'[name].js'
+        filename:'[name].js',
+        publicPath:website.publicPath
     },
 
     // 模块：列入解析CSS，图片路径转换等
@@ -29,7 +36,10 @@ module.exports = {
         rules:[
             {
                 test : /\.css$/,
-                use:['style-loader','css-loader']
+                use:extractTextPlugin.extract({
+                    fallback:'style-loader',
+                    use:'css-loader'
+                })
             },
             {
                 test : /\.(png|jpg|gif)/,
@@ -57,7 +67,9 @@ module.exports = {
             },
             hash:true,
             template:'./src/index.html'
-        })
+        }),
+        // 单独打包CSS文件
+        new extractTextPlugin('/css/index.css')
     ],
 
     // 配置webpack开发服务以及热更新
